@@ -27,15 +27,19 @@ As you see, these are pretty common ones that is hard to live without. Also ther
 
 You have to run it from LiveResponse console and provide single parameter which is your script / cmdlet. The command which is your single parameter must have at beginning double and single quote and at the end single and dobule quote. Examples
 ```
+Before modification: $PSVersionTable.PSVersion
 C:\> run msdefinvoker.ps1 "'#D#PSVersionTable.PSVersion'"
 Output: 5.1.20348.3932
 
+Before modification: Get-Date | Select-Object DateTime
 C:\> run msdefinvoker.ps1 "'Get-Date #P# Select-Object DateTime'"
 Output: @{DateTime=Friday, August 8, 2025 7:51:42 PM}
 
+Before modification: $env:APPDATA
 C:\> run msdefinvoker.ps1 "'#D#env:APPData'"
 Output: C:\Windows\system32\config\systemprofile\AppData\Roaming
 
+Before modification: Get-Process | ForEach-Object { Write-Host "Process '$($_.ProcessName)' (ID: $($_.Id)) is using $("{0:N2}" -f ($_.WorkingSet / 1MB)) MB of memory." }
 C:\> run msdefinvoker.ps1 "'Get-Process #P# ForEach-Object { Write-Host #Q#Process ''#D##LP##D#_.ProcessName#RP#'' #LP#ID: #D##LP##D#_.Id#RP##RP# is using #D##LP##Q#{0:N2}#Q# -f #LP##D#_.WorkingSet / 1MB #RP##RP# MB of memory.#Q# }'"
 Output:
 Process 'svchost' (ID: 6984) is using 12.40 MB of memory.
